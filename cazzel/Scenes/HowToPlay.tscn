@@ -1,0 +1,219 @@
+[gd_scene load_steps=18 format=3 uid="uid://cxm4kbfnglls8"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/DataManager.gd" id="1_aa8tm"]
+[ext_resource type="Script" path="res://Scripts/Gameplay/DrawingManager.gd" id="2_ckyx4"]
+[ext_resource type="Texture2D" uid="uid://dseic8ksqpch1" path="res://Assets/HowToPlayWindow.png" id="3_dclm3"]
+[ext_resource type="FontFile" uid="uid://dbbjhciux01ic" path="res://Assets/font.ttf" id="3_ujvvm"]
+[ext_resource type="Script" path="res://Scripts/UI/load_new_scene.gd" id="4_6hwie"]
+[ext_resource type="Script" path="res://Scripts/UI/transition.gd" id="5_bbhl6"]
+[ext_resource type="Texture2D" uid="uid://bslkgddk2pmap" path="res://Assets/Line.png" id="6_m1tbw"]
+[ext_resource type="Script" path="res://Scripts/UI/howToPlayShow.gd" id="7_7lgp0"]
+[ext_resource type="Texture2D" uid="uid://c66nad0x16cdt" path="res://Assets/V.png" id="7_g0ubr"]
+[ext_resource type="Texture2D" uid="uid://dlxjfsp5lbkko" path="res://Assets/U.png" id="8_yh47u"]
+[ext_resource type="AudioStream" uid="uid://b5q8t5u2y8dwy" path="res://SFX/explosion.wav" id="10_07inv"]
+[ext_resource type="AudioStream" uid="uid://n58mont53b8c" path="res://SFX/PopSFX.wav" id="11_u0npa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rliip"]
+bg_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_robpo"]
+bg_color = Color(0.000693897, 0.000693898, 0.000693897, 1)
+
+[sub_resource type="Animation" id="Animation_lssir"]
+resource_name = "Open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-58, -32), Vector2(-1293, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-58, 360), Vector2(1171, 360)]
+}
+
+[sub_resource type="Animation" id="Animation_4fbfg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-58, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-58, 360)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjnhh"]
+_data = {
+"Open": SubResource("Animation_lssir"),
+"RESET": SubResource("Animation_4fbfg")
+}
+
+[node name="HowToPlay" type="Node2D" node_paths=PackedStringArray("transition")]
+script = ExtResource("1_aa8tm")
+transition = NodePath("CanvasLayer/Transition/AnimationPlayer")
+
+[node name="DrawingManager" type="Node" parent="."]
+script = ExtResource("2_ckyx4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="explain" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -392.0
+offset_top = 71.0
+offset_right = 4666.0
+offset_bottom = 2207.0
+grow_horizontal = 2
+scale = Vector2(0.155, 0.155)
+theme_override_fonts/font = ExtResource("3_ujvvm")
+theme_override_font_sizes/font_size = 336
+text = "When you encounter shapes, draw them on the screen to destroy them"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="explain2" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -392.0
+offset_top = 402.0
+offset_right = 4666.0
+offset_bottom = 2538.0
+grow_horizontal = 2
+scale = Vector2(0.155, 0.155)
+theme_override_fonts/font = ExtResource("3_ujvvm")
+theme_override_font_sizes/font_size = 336
+text = "defend the castle!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BackToMenu" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("transition")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -178.0
+offset_top = -75.0
+offset_right = 603.0
+offset_bottom = 59.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.45, 0.45)
+theme_override_fonts/font = ExtResource("3_ujvvm")
+theme_override_font_sizes/font_size = 101
+theme_override_styles/focus = SubResource("StyleBoxFlat_rliip")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_rliip")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_rliip")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_rliip")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_rliip")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_rliip")
+theme_override_styles/hover = SubResource("StyleBoxFlat_robpo")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_rliip")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rliip")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_rliip")
+theme_override_styles/normal = SubResource("StyleBoxFlat_rliip")
+text = "Back To menu"
+script = ExtResource("4_6hwie")
+scene = "res://Scenes/Menu.tscn"
+transition = NodePath("../Transition/AnimationPlayer")
+
+[node name="Transition" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_bbhl6")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Transition"]
+layout_mode = 0
+offset_left = -58.0
+offset_top = -32.0
+offset_right = 1210.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Transition"]
+layout_mode = 0
+offset_left = -58.0
+offset_top = 360.0
+offset_right = 1210.0
+offset_bottom = 752.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Transition"]
+libraries = {
+"": SubResource("AnimationLibrary_hjnhh")
+}
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 1
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("3_dclm3")
+
+[node name="Line" type="Sprite2D" parent="."]
+position = Vector2(348, 281)
+scale = Vector2(3, 3)
+texture = ExtResource("6_m1tbw")
+script = ExtResource("7_7lgp0")
+
+[node name="Line2" type="Sprite2D" parent="."]
+position = Vector2(548, 277)
+scale = Vector2(3, 3)
+texture = ExtResource("7_g0ubr")
+script = ExtResource("7_7lgp0")
+type = "V"
+
+[node name="Line3" type="Sprite2D" parent="."]
+position = Vector2(754, 277)
+scale = Vector2(3, 3)
+texture = ExtResource("8_yh47u")
+script = ExtResource("7_7lgp0")
+type = "Omega"
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_07inv")
+volume_db = -22.034
+
+[node name="Audio2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_u0npa")
+
+[connection signal="pressed" from="CanvasLayer/BackToMenu" to="CanvasLayer/BackToMenu" method="_on_pressed"]

@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://t6h82dxen8b8"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/xp_label.gd" id="1_xkbvv"]
+[ext_resource type="FontFile" uid="uid://dbbjhciux01ic" path="res://Assets/font.ttf" id="1_yg7f2"]
+[ext_resource type="AudioStream" uid="uid://n58mont53b8c" path="res://SFX/PopSFX.wav" id="3_hukni"]
+
+[node name="New_XP" type="Node2D"]
+script = ExtResource("1_xkbvv")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -392.0
+offset_top = -148.0
+offset_right = 393.0
+offset_bottom = 148.0
+scale = Vector2(0.135, 0.135)
+pivot_offset = Vector2(392, 148)
+theme_override_fonts/font = ExtResource("1_yg7f2")
+theme_override_font_sizes/font_size = 276
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hukni")
+volume_db = 5.288

@@ -1,0 +1,294 @@
+[gd_scene load_steps=17 format=3 uid="uid://bcxanckr6oom0"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/DataManager.gd" id="1_ujsn5"]
+[ext_resource type="Script" path="res://Scripts/Gameplay/DrawingManager.gd" id="2_fgo2e"]
+[ext_resource type="FontFile" uid="uid://dbbjhciux01ic" path="res://Assets/font.ttf" id="3_55m74"]
+[ext_resource type="Texture2D" uid="uid://cpbycuabb5elw" path="res://Assets/CastleBackground.png" id="3_hdmhy"]
+[ext_resource type="Script" path="res://Scripts/UI/load_new_scene.gd" id="4_n27s4"]
+[ext_resource type="Script" path="res://Scripts/UI/transition.gd" id="5_1r4ck"]
+[ext_resource type="Script" path="res://Scripts/Background/Wizard.gd" id="6_w1exk"]
+[ext_resource type="Texture2D" uid="uid://h1gg6afnttcn" path="res://Assets/Cazzel.png" id="7_582jx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7hc0"]
+bg_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hjhl"]
+bg_color = Color(0.000693897, 0.000693898, 0.000693897, 1)
+
+[sub_resource type="Animation" id="Animation_lssir"]
+resource_name = "Open"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-58, -32), Vector2(-1293, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-58, 360), Vector2(1171, 360)]
+}
+
+[sub_resource type="Animation" id="Animation_4fbfg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-58, -32)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ColorRect2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-58, 360)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hjnhh"]
+_data = {
+"Open": SubResource("Animation_lssir"),
+"RESET": SubResource("Animation_4fbfg")
+}
+
+[sub_resource type="Animation" id="Animation_5atwt"]
+resource_name = "Idle"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.46667, 6.83333, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.1, 1.1), Vector2(1.06, 1.06), Vector2(1.048, 1.048), Vector2(1.1, 1.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.9, 3.43333, 5.03333, 6.06667, 7.46667, 9, 10),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-26.345, 12.93), Vector2(-28.243, -8.112), Vector2(-18.894, -9.521), Vector2(0, 0), Vector2(29.04, -13.95), Vector2(36.918, 14.823), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_hl4kl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.1, 1.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2b6o7"]
+_data = {
+"Idle": SubResource("Animation_5atwt"),
+"RESET": SubResource("Animation_hl4kl")
+}
+
+[node name="Menu" type="Node2D" node_paths=PackedStringArray("transition")]
+script = ExtResource("1_ujsn5")
+transition = NodePath("CanvasLayer/Transition/AnimationPlayer")
+
+[node name="DrawingManager" type="Node" parent="."]
+script = ExtResource("2_fgo2e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Play" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("transition")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = 92.0
+offset_right = 307.0
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.59, 0.59)
+theme_override_fonts/font = ExtResource("3_55m74")
+theme_override_font_sizes/font_size = 101
+theme_override_styles/focus = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4hjhl")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m7hc0")
+text = "Play"
+script = ExtResource("4_n27s4")
+transition = NodePath("../Transition/AnimationPlayer")
+
+[node name="HowToPlay" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("transition")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -202.0
+offset_top = 192.0
+offset_right = 537.0
+offset_bottom = 326.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.59, 0.59)
+theme_override_fonts/font = ExtResource("3_55m74")
+theme_override_font_sizes/font_size = 101
+theme_override_styles/focus = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4hjhl")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxFlat_m7hc0")
+theme_override_styles/normal = SubResource("StyleBoxFlat_m7hc0")
+text = "How to play"
+script = ExtResource("4_n27s4")
+scene = "res://Scenes/HowToPlay.tscn"
+transition = NodePath("../Transition/AnimationPlayer")
+
+[node name="Transition" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_1r4ck")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Transition"]
+z_index = 1
+layout_mode = 0
+offset_left = -58.0
+offset_top = -32.0
+offset_right = 1210.0
+offset_bottom = 360.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Transition"]
+z_index = 1
+layout_mode = 0
+offset_left = -58.0
+offset_top = 360.0
+offset_right = 1210.0
+offset_bottom = 752.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Transition"]
+libraries = {
+"": SubResource("AnimationLibrary_hjnhh")
+}
+
+[node name="Line2D" type="Line2D" parent="."]
+z_index = 1
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+scale = Vector2(1.1, 1.1)
+pivot_offset = Vector2(576, 324)
+texture = ExtResource("3_hdmhy")
+script = ExtResource("6_w1exk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Background"]
+libraries = {
+"": SubResource("AnimationLibrary_2b6o7")
+}
+speed_scale = 0.3
+
+[node name="Cazzel" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(557, 133)
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("7_582jx")
+
+[node name="Cazzel4" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(561, 180)
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("7_582jx")
+
+[node name="Cazzel5" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(585, 123)
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("7_582jx")
+
+[node name="Cazzel6" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(545, 158)
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("7_582jx")
+
+[node name="Cazzel2" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(611, 171)
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("7_582jx")
+
+[node name="Cazzel3" type="Sprite2D" parent="."]
+position = Vector2(579, 151)
+scale = Vector2(3.135, 3.135)
+texture = ExtResource("7_582jx")
+
+[connection signal="pressed" from="CanvasLayer/Play" to="CanvasLayer/Play" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/HowToPlay" to="CanvasLayer/HowToPlay" method="_on_pressed"]

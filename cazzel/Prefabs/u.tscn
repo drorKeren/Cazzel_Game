@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4b57prsl4nut"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Enemy.gd" id="1_lak61"]
+[ext_resource type="Texture2D" uid="uid://dlxjfsp5lbkko" path="res://Assets/U.png" id="2_7g0vb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mp4u0"]
+radius = 28.2843
+
+[node name="U" type="RigidBody2D"]
+gravity_scale = 0.1
+script = ExtResource("1_lak61")
+type = "Omega"
+xp = 30
+damage = 25
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mp4u0")
+
+[node name="U" type="Node2D" parent="."]
+
+[node name="GFX" type="Sprite2D" parent="U"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_7g0vb")

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvept77p5ywby"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Enemy.gd" id="1_fiflu"]
+[ext_resource type="Texture2D" uid="uid://tebj5wnuqslh" path="res://Assets/MonaLisa.png" id="2_r6a46"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x7cnw"]
+radius = 95.0
+height = 252.0
+
+[node name="MonaLisa" type="RigidBody2D"]
+gravity_scale = 0.1
+script = ExtResource("1_fiflu")
+type = "MonaLisa"
+damage = 70
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -1)
+shape = SubResource("CapsuleShape2D_x7cnw")
+
+[node name="Line" type="Node2D" parent="."]
+
+[node name="GFX" type="Sprite2D" parent="Line"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_r6a46")
